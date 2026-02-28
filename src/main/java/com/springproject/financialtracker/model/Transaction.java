@@ -61,10 +61,6 @@ public class Transaction {
         return user;
     }
 
-    public void setTransactionId(Long transactionId) {
-        this.transactionId = transactionId;
-    }
-
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
