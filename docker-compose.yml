@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgres
+    container_name: finance-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    restart: always
+
+#docker-compose up -d
