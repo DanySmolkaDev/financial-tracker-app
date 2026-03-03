@@ -1,12 +1,15 @@
 package com.springproject.financialtracker.controller;
 
+import com.springproject.financialtracker.dto.DashboardSummary;
 import com.springproject.financialtracker.model.Transaction;
+import com.springproject.financialtracker.model.User;
 import com.springproject.financialtracker.service.TransactionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 public class TransactionController {
@@ -21,5 +24,14 @@ public class TransactionController {
         Transaction savedTransaction = transactionService.createTransaction(transaction);
 
         return new ResponseEntity<>(savedTransaction, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/api/transactions/dashboard/{userId}")
+    public ResponseEntity<DashboardSummary> getSummary(@PathVariable Long userId) {
+        User user = new User();
+        user.setUserId(userId);
+
+        BigDecimal monthlyCashFlow = transactionService.calculateMonthlyTransactions(user);
+        return new ResponseEntity<>(new DashboardSummary(monthlyCashFlow), HttpStatus.OK);
     }
 }
