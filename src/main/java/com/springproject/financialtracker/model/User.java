@@ -23,7 +23,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     Role role;
 
-    BigDecimal balance;
     BigDecimal budget;
 
     public User(){}
@@ -33,7 +32,6 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.balance = balance;
         this.budget = budget;
     }
 
@@ -60,13 +58,6 @@ public class User {
     }
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
     }
 
     public BigDecimal getBudget() {
